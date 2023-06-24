@@ -32,7 +32,7 @@ function CreateProposal() {
       functionName: "totalProposals",
     });
 
-    setData({ price, balance, totalProposals });
+    setData({  balance, totalProposals });
   }
   useEffect(() => {
     getdata();

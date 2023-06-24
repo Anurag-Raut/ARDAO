@@ -4,10 +4,10 @@ import NFTMarketplace from '../backend/artifacts/contracts/NFTmarketplace.sol/NF
 
 import Dao from '../backend/artifacts/contracts/Dao.sol/DAO.json'
 import DaoToken from '../backend/artifacts/contracts/Daotoken.sol/DAOToken.json'
-export const ARTokenAddress = "0x3f6EF4aD1027701286F9600b1863e2dE1703085c";
-export const NFTMarketplaceAddress = "0x8315d7ef574Ed79D1578B365052Fd9b484497d73";
-export const DAOAddress = "0x4a925e2A1BDaBa093171cAC2C212f64B304e8f2A";
-export const DAOTokenAddress = "0x283636d09285b64C3Db0654637212Fc7222e5d5B";
+export const ARTokenAddress = "0xe16D8758626B9320F404c2c965897762ABDce372";
+export const NFTMarketplaceAddress = "0x99Ccc5777CD8927c84C5C85F91535ccF6EBc2c3B";
+export const DAOAddress = "0xB3881f54FC0556cF238963d4616B84C383a86C98";
+export const DAOTokenAddress = "0xb76E642b3dE4b2D188BaeF8e87Bdb01d4812409a";
 
 
 
