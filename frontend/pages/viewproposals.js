@@ -113,11 +113,11 @@ function ViewProposals() {
       <h1 className={styles.title}>Proposals</h1>
       <div className="flex flex-col items-center">
       {activeTab === 1
-        ? activeProposals?.map((data) => {
-          return <ActiveItems data={data} Active={1} />;
+        ? activeProposals?.map((data,index) => {
+          return <ActiveItems key={index} data={data} Active={1} />;
         })
         : inActiveProposals?.map((data) => {
-          return <ActiveItems data={data} Active={0} />;
+          return <ActiveItems key={index} data={data} Active={0} />;
         })}
         </div>
     </>
