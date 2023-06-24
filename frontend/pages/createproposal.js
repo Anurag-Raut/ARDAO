@@ -19,11 +19,7 @@ function CreateProposal() {
   const { address, isConnected } = useAccount();
   const [data, setData] = useState({});
   async function getdata() {
-    const price = await readContract({
-      address: NFTMarketplaceAddress,
-      abi: NFTMarketplaceABI.abi,
-      functionName: "getPrice",
-    });
+    
     const balance = await readContract({
       address: DAOTokenAddress,
       abi: DAOTokenABI.abi,
