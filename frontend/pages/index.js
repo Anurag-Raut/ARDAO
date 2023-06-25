@@ -34,8 +34,8 @@ const Home = () => {
     functionName: 'getBalance',
     watch: true,
   })
-  console.log(daobalance)
-  console.log(daobalance?.data);
+  console.log('balance',daobalance)
+  console.log("balance data",daobalance?.data);
   // useEffect(()=>{
   //   setDaoBalance(ethers?.formatEther
   //   (daobalance?.data?.toString(),'wei'));
