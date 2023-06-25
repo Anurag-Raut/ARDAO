@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { ToastContainer, toast } from 'react-toastify';
 import { readContract,writeContract } from '@wagmi/core';
 import { ethers } from "ethers";
 import {
@@ -113,6 +114,18 @@ const Home = () => {
           Made with ❤️ by your frens at 🌈
         </a>
       </footer>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     </div>
   );
 };

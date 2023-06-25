@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { useState, useEffect } from "react";
 import { readContract,writeContract } from '@wagmi/core';
+import { ToastContainer, toast } from 'react-toastify';
 import styles from "../styles/Home.module.css";
 import {
   DAOABI,
@@ -35,23 +36,59 @@ function CreateProposal() {
     setData({  balance, totalProposals });
   }
   useEffect(() => {
-    getdata();
+    try{
+      getdata();
+    
+    }
+    catch{
+      toast.warn(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+    }
+   
   }, []);
 
   async function addProposal(){
     let _tokenId=document.getElementById('tokenId')?.value;
     let _deadline=document.getElementById('deadline')?.value;
     let timestamp=new Date(_deadline).getTime();
-    
-    const { hash } = await writeContract({
-      address: DAOAddress,
-      abi: DAOABI.abi,
-      functionName: 'CreateProposal',
-      args:[_tokenId,timestamp],
-    
+    try{
+
+      const { hash } = await writeContract({
+        address: DAOAddress,
+        abi: DAOABI.abi,
+        functionName: 'CreateProposal',
+        args:[_tokenId,timestamp],
       
-     
-    })
+        
+       
+      })
+
+
+    }
+    catch(error) {
+      toast.warn(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+    }
+    
+   
 
 
 

@@ -2,6 +2,7 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import { readContract, writeContract } from "@wagmi/core";
 import styles from "../styles/Home.module.css";
+import { ToastContainer, toast } from 'react-toastify';
 import {
   DAOABI,
   DAOAddress,

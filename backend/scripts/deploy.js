@@ -31,7 +31,7 @@ async function main() {
  
 
   
-  await sleep(5 * 1000);
+  await sleep(30 * 1000);
 
 
 
