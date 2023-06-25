@@ -39,6 +39,7 @@ const Home = () => {
   // useEffect(()=>{
   //   useConnect({})
   // },[])
+  //
   useEffect(()=>{
     if(isConnected){
       setDaoBalance(ethers?.formatEther
