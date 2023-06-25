@@ -3,10 +3,10 @@
   import NFTMarketplace from './abi/NFTmarketplace.sol/NFTMarketplace.json'
   import Dao from './abi/Dao.sol/DAO.json'
   import DaoToken from './abi/Daotoken.sol/DAOToken.json'
-export const ARTokenAddress = "0x3ec0F1cA069ab0bbDAbaceF055D66FfD0774C8DD";
-export const NFTMarketplaceAddress = "0xF8e3F17c1281A8D050cD6393968E2143aF7D0132";
-export const DAOAddress = "0x026827870B9cB08cb5b6A755573d746c10ea032B";
-export const DAOTokenAddress = "0xd5CA685AC1CF320FE781D0B69C932Df1e7099783";
+export const ARTokenAddress = "0xB6fD63A03c5fafb6f1EC76b1EF268Ed317eFeA4f";
+export const NFTMarketplaceAddress = "0x7006C24DB8a8E97836e365d8998F363a9cc8C0a2";
+export const DAOAddress = "0xfe6BE2218238A198faC704557750890a3D18B1FD";
+export const DAOTokenAddress = "0x2476C7e0B810E5a03A121Fe9c9F1Cd0CFE95334f";
 
 
 

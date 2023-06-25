@@ -39,11 +39,10 @@ const Home = () => {
   // useEffect(()=>{
   //   useConnect({})
   // },[])
-  //
   useEffect(()=>{
     if(isConnected){
-      setDaoBalance(ethers?.formatEther
-        (daobalance?.data?.toString(),'wei'));
+      console.log(daobalance?.data?.toString())
+      // setDaoBalance(ethers.formatEther(daobalance?.data?.toString(),'wei').toString());
     }
     else{
       toast.error('connect to wallet', {
