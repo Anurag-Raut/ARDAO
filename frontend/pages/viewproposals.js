@@ -136,7 +136,7 @@ function ViewProposals() {
         ? activeProposals?.map((data,index) => {
           return <ActiveItems key={index} data={data} Active={1} />;
         })
-        : inActiveProposals?.map((data) => {
+        : inActiveProposals?.map((data,index) => {
           return <ActiveItems key={index} data={data} Active={0} />;
         })}
         </div>
