@@ -115,7 +115,7 @@ const Home = () => {
 
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id='main-div'>
       <Head>
         <title>RainbowKit App</title>
         <meta
