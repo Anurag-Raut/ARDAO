@@ -8,10 +8,13 @@ import {
   DAOTokenABI,
   DAOTokenAddress,
 } from "../constants.js";
+import { ToastContainer, toast } from 'react-toastify';
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { readContract, writeContract } from "@wagmi/core";
+
 function ActiveItems({ data, Active }) {
   async function Vote(_vote) {
+    try{
     console.log(_vote);
     const { hash } = await writeContract({
       address: DAOAddress,
@@ -20,18 +23,57 @@ function ActiveItems({ data, Active }) {
       args: [data.id, _vote],
     });
     if (hash) {
-      console.log("done");
+        toast.success(`succesfully voted for proposal ${data.id}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
     } else {
       console.log("not done");
     }
+}
+catch(error){
+    toast.error(error.toString(), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+}
   }
   async function execute() {
+    try{
+
+    
     const { hash } = await writeContract({
       address: DAOAddress,
       abi: DAOABI.abi,
       functionName: "executeProposal",
       args: [data.id],
     });
+}
+catch(error){
+    toast.error(error.toString(), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+}
   }
 
   return (

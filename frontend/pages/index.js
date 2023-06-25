@@ -6,6 +6,9 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { ToastContainer, toast } from 'react-toastify';
 import { readContract,writeContract } from '@wagmi/core';
 import { ethers } from "ethers";
+import { useSendTransaction, usePrepareSendTransaction } from 'wagmi'
+import { useContractRead } from 'wagmi'
+
 import {
   CryptoDevsDAOABI,
   CryptoDevsDAOAddress,
@@ -13,39 +16,83 @@ import {
   CryptoDevsNFTAddress,
   DAOTokenAddress,
   DAOTokenABI,
+  DAOABI,
+  DAOAddress
 } from "../constants.js";
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import { get } from 'https';
 const Home = () => {
   const {address,isConnected}=useAccount();
+  const[DaoBalance,setDaoBalance]=useState('0');
   
   console.log(NFTMarketplaceABI);
-  async function reactContract(){
-    const data = await readContract({
-      address: '0x6E2B08A1083a645e4bbaba9F20fA7142650153Bb',
-      abi: NFTMarketplaceABI.abi,
-      functionName:'getPrice'
-     
-    })
-    console.log(data);
-  }
+ 
+  const { data, isLoading, isSuccess, sendTransaction } = useSendTransaction();
+  const daobalance = useContractRead({
+    address: DAOAddress,
+    abi: DAOABI.abi,
+    functionName: 'getBalance',
+    watch: true,
+  })
+  console.log(daobalance.data)
   useEffect(()=>{
-    console.log(address);
-    // reactContract();
-    
-  },[address]);
+    setDaoBalance(ethers.formatEther
+    (daobalance.data.toString(),'wei'));
+
+  },[daobalance])
 
   async function BuyDaoToken(){
 
+    try{
+      const { hash } = await writeContract({
+        address: DAOTokenAddress,
+        abi: DAOTokenABI.abi,
+        functionName: 'mint',
+        value:ethers.parseEther('0.02'),
+       
+      })
 
-    const { hash } = await writeContract({
-      address: DAOTokenAddress,
-      abi: DAOTokenABI.abi,
-      functionName: 'mint',
-      value:ethers.parseEther('0.02'),
-     
-    })
+
+    }catch (error){
+      toast.warn(error.toString(), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+    }
+  
     
   }
+
+  function sendEth(){
+  try{
+    let amount=document.getElementById('send-eth-amount').value;
+    sendTransaction({to:DAOAddress,value:ethers.parseEther(amount)});
+  }
+  catch(error){
+    toast.error(error.toString(), {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
+  }
+ 
+  
+
+  
 
 
   return (
@@ -66,24 +113,10 @@ const Home = () => {
           Welcome to DAO
           
         </h1>
-        {/* <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
-          <div className={styles.description}>Welcome to the DAO!</div>
-          <div className={styles.description}>
-            Your CryptoDevs NFT Balance: {nftBalanceOfUser.data.toString()}
-            <br />
-            {daoBalance.data && (
-              <>
-                Treasury Balance:{" "}
-                {formatEther(daoBalance.data.value).toString()} ETH
-              </>
-            )}
-            <br />
-            Total Number of Proposals: {numOfProposalsInDAO.data.toString()}
-          </div> */}
+        
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          balance of dao {DaoBalance} ETH
         </p>
 
         <div className={styles.grid}>
@@ -104,6 +137,12 @@ const Home = () => {
             <h2>View Proposals &rarr;</h2>
             <p>Discover boilerplate example RainbowKit projects.</p>
           </Link>
+          <div className={styles.card} >
+            <h2>Send ETH to DAO &rarr;</h2>
+            <p>Learn how to interact with Ethereum.</p>
+            <input type="number" id="send-eth-amount" class=" m-2block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            <button onClick={()=>{sendEth()}} type="button" class=" m-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">PAY</button>
+          </div>
 
           
         </div>
@@ -111,21 +150,10 @@ const Home = () => {
 
       <footer className={styles.footer}>
         <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by your frens at 🌈
+          Anurag Raut
         </a>
       </footer>
-      <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+     
     </div>
   );
 };

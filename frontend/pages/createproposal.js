@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { readContract,writeContract } from '@wagmi/core';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from "../styles/Home.module.css";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   DAOABI,
   DAOAddress,
@@ -14,24 +15,28 @@ import {
   DAOTokenABI,
   DAOTokenAddress,
 } from "../constants.js";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAccount, useConnect, useDisconnect,useContractRead } from "wagmi";
 // a
 function CreateProposal() {
   const { address, isConnected } = useAccount();
   const [data, setData] = useState({});
+  const balance = useContractRead({
+    address: DAOTokenAddress,
+    abi: DAOTokenABI.abi,
+    functionName: 'balanceOf',
+    args: [address],
+    watch: true,
+  })
+  const totalProposals =  useContractRead({
+    address: DAOAddress,
+    abi: DAOABI.abi,
+    functionName: "totalProposals",
+    watch:true
+  });
   async function getdata() {
     
-    const balance = await readContract({
-      address: DAOTokenAddress,
-      abi: DAOTokenABI.abi,
-      functionName: "balanceOf",
-      args: [address],
-    });
-    const totalProposals = await readContract({
-      address: DAOAddress,
-      abi: DAOABI.abi,
-      functionName: "totalProposals",
-    });
+   
+   
 
     setData({  balance, totalProposals });
   }
@@ -41,7 +46,8 @@ function CreateProposal() {
     
     }
     catch{
-      toast.warn(error, {
+    
+      ()=>toast.warn(error, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -62,7 +68,7 @@ function CreateProposal() {
     let timestamp=new Date(_deadline).getTime();
     try{
 
-      const { hash } = await writeContract({
+      const { hash,error } = await writeContract({
         address: DAOAddress,
         abi: DAOABI.abi,
         functionName: 'CreateProposal',
@@ -71,11 +77,12 @@ function CreateProposal() {
         
        
       })
-
+     
 
     }
     catch(error) {
-      toast.warn(error, {
+      console.log(error)
+      toast.warn(error.toString(), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -101,13 +108,21 @@ function CreateProposal() {
       <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
       <div className={styles.description}>Welcome to the DAO!</div>
       <div className={styles.description}>
-        Your CryptoDevs NFT Balance: {data?.balance?.toString()}
+        Your CryptoDevs NFT Balance: {balance?.data?.toString()}
         <br />
-        Total Number of Proposals: {data?.totalProposals?.toString()}
+        Total Number of Proposals: {totalProposals?.data?.toString()}
       </div>
-      <input id="tokenId" className="w-[20vw]" type="number" />
-      <input id='deadline' className="w-[20vw]"  type="date" />
-      <button onClick={addProposal}>create proposal </button>
+      <div className='m-2 w-[20vw]'>
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TokenId</label>
+        <input type="text"  id="tokenId" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    </div>
+    <div className='m-2 w-[20vw]'>
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
+        <input type="date" id='deadline' class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    </div>
+    <button  onClick={addProposal} type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">create proposal</button>
+     
+     
     </div>
   );
 }

@@ -4,8 +4,10 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
+
 const hre = require("hardhat");
 const fs = require('fs');
+const path = require('path');
 async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -60,11 +62,10 @@ async function main() {
  
 
   const constantsFileContent = `
-  import ARtoken from '../backend/artifacts/contracts/ARtoken.sol/ARtoken.json'
-import NFTMarketplace from '../backend/artifacts/contracts/NFTmarketplace.sol/NFTMarketplace.json'
-
-import Dao from '../backend/artifacts/contracts/Dao.sol/DAO.json'
-import DaoToken from '../backend/artifacts/contracts/Daotoken.sol/DAOToken.json'
+  import ARtoken from './abi/ARtoken.sol/ARtoken.json'
+  import NFTMarketplace from './abi/NFTmarketplace.sol/NFTMarketplace.json'
+  import Dao from './abi/Dao.sol/DAO.json'
+  import DaoToken from './abi/Daotoken.sol/DAOToken.json'
 export const ARTokenAddress = "${ARtoken.target}";
 export const NFTMarketplaceAddress = "${NFTmarketplace.target}";
 export const DAOAddress = "${Dao.target}";
@@ -80,6 +81,29 @@ export const DAOTokenABI = DaoToken;
 `;
 
   fs.writeFileSync('../frontend/constants.js', constantsFileContent);
+  function copyFolder(sourcePath, destinationPath) {
+    if (!fs.existsSync(destinationPath)) {
+      fs.mkdirSync(destinationPath);
+    }
+  
+    const files = fs.readdirSync(sourcePath);
+  
+    files.forEach((file) => {
+      const sourceFile = path.join(sourcePath, file);
+      const destinationFile = path.join(destinationPath, file);
+  
+      if (fs.lstatSync(sourceFile).isDirectory()) {
+        copyFolder(sourceFile, destinationFile);
+      } else {
+        fs.copyFileSync(sourceFile, destinationFile);
+      }
+    });
+  }
+
+  const sourceFolder = 'D:/grind/ARtoken/backend/artifacts/contracts';
+const destinationFolder = 'D:/grind/ARtoken/frontend/abi';
+
+copyFolder(sourceFolder, destinationFolder);
 
 
 
@@ -94,3 +118,5 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+
