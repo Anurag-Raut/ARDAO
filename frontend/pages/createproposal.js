@@ -16,6 +16,7 @@ import {
   DAOTokenAddress,
 } from "../constants.js";
 import { useAccount, useConnect, useDisconnect,useContractRead } from "wagmi";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 // a
 function CreateProposal() {
   const { address, isConnected } = useAccount();
@@ -104,7 +105,8 @@ function CreateProposal() {
 
   console.log(data);
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex p-6 flex-col items-center ">
+       <ConnectButton />
       <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
       <div className={styles.description}>Welcome to the DAO!</div>
       <div className={styles.description}>

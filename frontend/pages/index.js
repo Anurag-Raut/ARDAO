@@ -37,10 +37,28 @@ const Home = () => {
   console.log('balance',daobalance)
   console.log("balance data",daobalance?.data);
   // useEffect(()=>{
-  //   setDaoBalance(ethers?.formatEther
-  //   (daobalance?.data?.toString(),'wei'));
+  //   useConnect({})
+  // },[])
+  useEffect(()=>{
+    if(isConnected){
+      setDaoBalance(ethers?.formatEther
+        (daobalance?.data?.toString(),'wei'));
+    }
+    else{
+      toast.error('connect to wallet', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+    
 
-  // },[daobalance])
+  },[daobalance])
 
   async function BuyDaoToken(){
 

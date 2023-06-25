@@ -15,6 +15,7 @@ import {
 } from "../constants.js";
 import { useAccount, useConnect, useDisconnect,useContractRead } from "wagmi";
 import ActiveItems from "../components/ActiveItem";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 function ViewProposals() {
   const [activeProposals, setActiveProposals] = useState([]);
@@ -79,8 +80,10 @@ function ViewProposals() {
 
   return (
     <>
-      <div className="tab  flex flex-col items-center justify-center ">
-        <ul class="hidden w-[40vw] text-sm font-medium text-center text-gray-500 divide-x divide-gray-200  shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+    
+      <div className="tab p-6 flex flex-col items-center justify-center ">
+      <ConnectButton />
+        <ul class="hidden mt-6 w-[40vw] text-sm font-medium text-center text-gray-500 divide-x divide-gray-200  shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
           <li class="w-1/2 " onClick={()=>{setActiveTab(1)}}>
           {
               activeTab===1?
