@@ -20,7 +20,7 @@ import {
   DAOAddress
 } from "../constants.js";
 import {useEffect, useState} from 'react';
-import { get } from 'https';
+
 const Home = () => {
   const {address,isConnected}=useAccount();
   const[DaoBalance,setDaoBalance]=useState('0');
@@ -34,7 +34,8 @@ const Home = () => {
     functionName: 'getBalance',
     watch: true,
   })
-  console.log(daobalance?.data)
+  console.log(daobalance)
+  console.log(daobalance?.data);
   // useEffect(()=>{
   //   setDaoBalance(ethers?.formatEther
   //   (daobalance?.data?.toString(),'wei'));
