@@ -51,7 +51,7 @@ contract DAO is Ownable{
     }
 
     modifier NFTholderonly(){
-        require(daotoken.balanceOf(msg.sender)>0,"you dont hold the nft");
+        require(daotoken.balanceOf(msg.sender)>0,"Buy DAO Tokens ");
         _;
     }
    
@@ -108,9 +108,8 @@ contract DAO is Ownable{
     //     "DEADLINE_EXCEEDED"
     // );
 
-    // If the proposal has more YAY votes than NAY votes
-    // purchase the NFT from the FakeNFTMarketplace
-    if (proposal.PosVotes > proposal.NegVotes) {
+  
+    if (proposal.PosVotes >= proposal.NegVotes) {
         uint256 nftPrice = marketplace.getPrice();
         require(address(this).balance >= nftPrice, "NOT_ENOUGH_FUNDS");
         marketplace.purchase{value: 0.03 ether}(proposal.nftTokenId);

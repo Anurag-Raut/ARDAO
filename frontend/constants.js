@@ -1,12 +1,12 @@
 
-import ARtoken from './abi/ARtoken.sol/ARtoken.json'
-import NFTMarketplace from './abi/NFTmarketplace.sol/NFTMarketplace.json'
-import Dao from './abi/Dao.sol/DAO.json'
-import DaoToken from './abi/Daotoken.sol/DAOToken.json'
-export const ARTokenAddress = "0x12EA0d239B1eCCAC55277b2D788daF8254bEe676";
-export const NFTMarketplaceAddress = "0xb2DC99A8436DC9A94286a9B68a739A30C10015B9";
-export const DAOAddress = "0xC23c232D161638B1258fd25589636bb23398B01a";
-export const DAOTokenAddress = "0x3ED8Dee888Fc10e9e6783Ff6EF0aFF6A4C073FD7";
+  import ARtoken from './abi/ARtoken.sol/ARtoken.json'
+  import NFTMarketplace from './abi/NFTmarketplace.sol/NFTMarketplace.json'
+  import Dao from './abi/Dao.sol/DAO.json'
+  import DaoToken from './abi/Daotoken.sol/DAOToken.json'
+export const ARTokenAddress = "0x87b234DdAa8c66BF9d6Ce087645Fa50ba2d092aB";
+export const NFTMarketplaceAddress = "0xB9fcAB769F346a785df9dA10FFD363245D8233d6";
+export const DAOAddress = "0x4eBf2A26C7857B9a5Aa3aEafC44b43F982619929";
+export const DAOTokenAddress = "0xd6527558d1C4D572e4CCADa60BB02fC5D0F38cf1";
 
 
 

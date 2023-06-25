@@ -107,8 +107,8 @@ function CreateProposal() {
   return (
     <div className="flex p-6 flex-col items-center ">
        <ConnectButton />
-      <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
-      <div className={styles.description}>Welcome to the DAO!</div>
+      <h1 className={styles.title}>Welcome to DAO!</h1>
+      
       <div className={styles.description}>
         Your CryptoDevs NFT Balance: {balance?.data?.toString()}
         <br />

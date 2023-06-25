@@ -135,30 +135,31 @@ const Home = () => {
         
 
         <p className={styles.description}>
-          balance of dao {DaoBalance} ETH
+          Balance of DAO {DaoBalance} ETH
         </p>
 
         <div className={styles.grid}>
-          <Link className={styles.card} href="/createproposal">
-            <h2>Create proposal &rarr;</h2>
-            <p>Learn how to customize your wallet connection flow.</p>
-          </Link>
+         
 
           <div className={styles.card} onClick={BuyDaoToken}>
             <h2>Buy Dao Token &rarr;</h2>
-            <p>Learn how to interact with Ethereum.</p>
+            <p>DAO tokens provides you acces to the DAO .</p>
           </div>
+          <Link className={styles.card} href="/createproposal">
+            <h2>Create proposal &rarr;</h2>
+            <p>Create proposals of the NFT you want DAO to buy</p>
+          </Link>
 
           <Link
             className={styles.card}
             href="/viewproposals"
           >
             <h2>View Proposals &rarr;</h2>
-            <p>Discover boilerplate example RainbowKit projects.</p>
+            <p>view all existing proposals</p>
           </Link>
           <div className={styles.card} >
             <h2>Send ETH to DAO &rarr;</h2>
-            <p>Learn how to interact with Ethereum.</p>
+            <p>Donate ETH to DAO , so it can buy the ARtokens</p>
             <input type="number" id="send-eth-amount" class=" m-2block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
             <button onClick={()=>{sendEth()}} type="button" class=" m-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">PAY</button>
           </div>
