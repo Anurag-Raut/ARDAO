@@ -35,11 +35,11 @@ const Home = () => {
     watch: true,
   })
   console.log(daobalance.data)
-  useEffect(()=>{
-    setDaoBalance(ethers?.formatEther
-    (daobalance?.data?.toString(),'wei'));
+  // useEffect(()=>{
+  //   setDaoBalance(ethers?.formatEther
+  //   (daobalance?.data?.toString(),'wei'));
 
-  },[daobalance])
+  // },[daobalance])
 
   async function BuyDaoToken(){
 
