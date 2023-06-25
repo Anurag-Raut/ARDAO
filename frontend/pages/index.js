@@ -25,7 +25,7 @@ const Home = () => {
   const {address,isConnected}=useAccount();
   const[DaoBalance,setDaoBalance]=useState('0');
   
-  console.log(NFTMarketplaceABI);
+  console.log(NFTMarketplaceABI,'nftmarketplaccabi');
  
   const { data, isLoading, isSuccess, sendTransaction } = useSendTransaction();
   const daobalance = useContractRead({
@@ -34,7 +34,7 @@ const Home = () => {
     functionName: 'getBalance',
     watch: true,
   })
-  console.log(daobalance.data)
+  console.log(daobalance?.data)
   // useEffect(()=>{
   //   setDaoBalance(ethers?.formatEther
   //   (daobalance?.data?.toString(),'wei'));
