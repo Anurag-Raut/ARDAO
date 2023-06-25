@@ -30,14 +30,14 @@ const Home = () => {
   const { data, isLoading, isSuccess, sendTransaction } = useSendTransaction();
   const daobalance = useContractRead({
     address: DAOAddress,
-    abi: DAOABI.abi,
+    abi: DAOABI?.abi,
     functionName: 'getBalance',
     watch: true,
   })
   console.log(daobalance.data)
   useEffect(()=>{
-    setDaoBalance(ethers.formatEther
-    (daobalance.data.toString(),'wei'));
+    setDaoBalance(ethers?.formatEther
+    (daobalance?.data?.toString(),'wei'));
 
   },[daobalance])
 
@@ -54,7 +54,7 @@ const Home = () => {
 
 
     }catch (error){
-      toast.warn(error.toString(), {
+      toast.warn(error?.toString(), {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -73,10 +73,10 @@ const Home = () => {
   function sendEth(){
   try{
     let amount=document.getElementById('send-eth-amount').value;
-    sendTransaction({to:DAOAddress,value:ethers.parseEther(amount)});
+    sendTransaction({to:DAOAddress,value:ethers?.parseEther(amount)});
   }
   catch(error){
-    toast.error(error.toString(), {
+    toast.error(error?.toString(), {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
