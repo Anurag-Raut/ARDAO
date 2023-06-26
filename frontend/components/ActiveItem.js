@@ -76,6 +76,12 @@ catch(error){
 }
   }
 
+  let date = new Date(0);
+
+  date.setUTCMilliseconds(data.deadline);
+ 
+
+
   return (
     <div className="m-5 flex justify-between block w-[50vw] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <div
@@ -88,6 +94,10 @@ catch(error){
         <p class="font-normal text-gray-700 dark:text-gray-400">
           {" "}
           token id : {data.tokenId}
+        </p>
+        <p class="font-normal text-gray-700 dark:text-gray-400">
+          {" "}
+          deadline : {date.toLocaleDateString('en-uk')}
         </p>
         </div>
         <div>
