@@ -134,10 +134,10 @@ function ViewProposals() {
       <div className="flex flex-col items-center">
       {activeTab === 1
         ? activeProposals?.map((data,index) => {
-          return <ActiveItems key={index} data={data} Active={1} />;
+          return <ActiveItems key={data.id} data={data} Active={1} />;
         })
         : inActiveProposals?.map((data,index) => {
-          return <ActiveItems key={index} data={data} Active={0} />;
+          return <ActiveItems key={data.id} data={data} Active={0} />;
         })}
         </div>
     </>
