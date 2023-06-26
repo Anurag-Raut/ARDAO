@@ -42,7 +42,7 @@ const Home = () => {
   useEffect(()=>{
     if(isConnected){
       console.log(daobalance?.data?.toString())
-      setDaoBalance(ethers.formatEther(daobalance?.data?.toString(),'wei').toString());
+      setDaoBalance(ethers?.formatEther(daobalance?.data?.toString(),'wei').toString());
     }
     else{
       toast.error('connect to wallet', {
@@ -143,7 +143,7 @@ const Home = () => {
 
           <div className={styles.card} onClick={BuyDaoToken}>
             <h2>Buy Dao Token &rarr;</h2>
-            <p>DAO tokens provides you acces to the DAO .</p>
+            <p>DAO tokens provides you access to the DAO .</p>
           </div>
           <Link className={styles.card} href="/createproposal">
             <h2>Create proposal &rarr;</h2>
