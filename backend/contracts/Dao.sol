@@ -2,6 +2,7 @@
 pragma solidity ^0.8.16;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import './Daotoken.sol';
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 interface INFTmarketPlace{
     function purchase (uint256 _tokenId)  external payable;
     function getPrice() external view returns (uint256);
@@ -25,7 +26,8 @@ interface IARtoken {
         returns (uint256);
 }
 
-contract DAO is Ownable{
+
+contract DAO is Ownable,ERC721Enumerable{
     
     struct Proposal{
   
@@ -43,15 +45,21 @@ contract DAO is Ownable{
     DAOToken daotoken;
      mapping (uint256=>Proposal) public proposals;
      uint256 public totalProposals=0;
-    constructor (address _nftMarketplace, address _artoken,address _daotoken){
-        marketplace=INFTmarketPlace(_nftMarketplace);
+      constructor(address _nftMarketplace, address _artoken,address _daotoken) ERC721("DAOToken", "DT") {
+           marketplace=INFTmarketPlace(_nftMarketplace);
         artoken=IARtoken(_artoken);
         daotoken=DAOToken(_daotoken);
+      }
 
+
+    function mint() public payable  {
+        require(msg.value==0.02 ether,"send 0.02 ether");
+        _mint(msg.sender, totalSupply());
     }
+   
 
     modifier NFTholderonly(){
-        require(daotoken.balanceOf(msg.sender)>0,"Buy DAO Tokens ");
+        require(balanceOf(msg.sender)>0,"Buy DAO Tokens ");
         _;
     }
    

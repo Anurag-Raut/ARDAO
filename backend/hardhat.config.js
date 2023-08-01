@@ -10,7 +10,7 @@ module.exports = {
   solidity: "0.8.18",
   networks:{
     mumbai:{
-      url:'https://rpc.ankr.com/polygon_mumbaiy',
+      url:'https://rpc.ankr.com/polygon_mumbai',
       accounts:[PRIVATE_KEY]
     }
     , sepolia:{

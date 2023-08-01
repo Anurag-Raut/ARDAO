@@ -65,8 +65,8 @@ const Home = () => {
     console.log('hello')
     try{
       const { hash } = await writeContract({
-        address: DAOTokenAddress,
-        abi: DAOTokenABI.abi,
+        address: DAOAddress,
+        abi: DAOABI.abi,
         functionName: 'mint',
         value:ethers.parseEther('0.02'),
        
@@ -96,7 +96,7 @@ const Home = () => {
     sendTransaction({to:DAOAddress,value:ethers?.parseEther(amount)});
   }
   catch(error){
-    toast.error(error?.toString(), {
+    toast.error(error?.message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

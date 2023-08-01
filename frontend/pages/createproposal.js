@@ -22,8 +22,8 @@ function CreateProposal() {
   const { address, isConnected } = useAccount();
   const [data, setData] = useState({});
   const balance = useContractRead({
-    address: DAOTokenAddress,
-    abi: DAOTokenABI.abi,
+    address: DAOAddress,
+    abi: DAOABI.abi,
     functionName: 'balanceOf',
     args: [address],
     watch: true,
@@ -83,7 +83,7 @@ function CreateProposal() {
     }
     catch(error) {
       console.log(error)
-      toast.warn(error.toString(), {
+      toast.warn(error.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

@@ -8,29 +8,27 @@ import { publicProvider } from 'wagmi/providers/public';
 import {useState,useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const sepoliaRpcUrl = 'YOUR_CUSTOM_SEPOLIA_RPC_URL';
-const sepoliaCustomConfig = {
-  id: 'custom-sepolia', // Unique ID for your custom chain
-  network: 'custom-sepolia-network', // Unique network name for your custom chain
-  name: 'Sepolia', // Replace with the name of your custom chain
-  chainId: 12345, // Replace with the chain ID of your custom chain
-  rpcUrls: [sepoliaRpcUrl],
-  nativeCurrency: {
-    name: 'Sepolia Token', // Replace with the name of your custom token
-    symbol: 'ST', // Replace with the symbol of your custom token
-    decimals: 18,
-  },
-  blockExplorerUrls: ['https://example-explorer.com'], // Replace with your custom block explorer URL
-};
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     mainnet,
     polygon,
     optimism,
     arbitrum,
-    polygonMumbai,
+   
     goerli,
-    sepolia,
+    { ...polygonMumbai,
+      rpcUrls:{
+        default:{
+          http:["https://polygon-mumbai-bor.publicnode.com"]
+    // public rpc url
+        },
+        public: {
+          http: ['https://polygon-mumbai-bor.publicnode.com'], // Replace with your custom block explorer URL
+        },
+      },
+    
+    },
    
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
   ],

@@ -61,7 +61,7 @@ function ViewProposals() {
     setInActiveProposals(inactive);
   }
   catch(error){
-    toast.error(error.toString(), {
+    toast.error(error.message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
