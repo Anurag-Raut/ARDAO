@@ -11,12 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-   
-    goerli,
+ 
     { ...polygonMumbai,
       rpcUrls:{
         default:{
@@ -30,7 +25,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     
     },
    
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+
   ],
   [publicProvider()]
 );
