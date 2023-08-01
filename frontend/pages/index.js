@@ -41,8 +41,9 @@ const Home = () => {
   // },[])
   useEffect(()=>{
     if(isConnected){
-      console.log(daobalance?.data?.toString())
-      setDaoBalance(ethers?.formatEther(daobalance?.data?.toString(),'wei').toString());
+      console.log(daobalance?.data)
+      if(daobalance?.data)
+        setDaoBalance(ethers?.formatEther(daobalance?.data?.toString(),'wei').toString());
     }
     else{
       toast.error('connect to wallet', {
@@ -61,7 +62,7 @@ const Home = () => {
   },[daobalance])
 
   async function BuyDaoToken(){
-
+    console.log('hello')
     try{
       const { hash } = await writeContract({
         address: DAOTokenAddress,
