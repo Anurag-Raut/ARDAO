@@ -10,15 +10,15 @@ module.exports = {
   solidity: "0.8.18",
   networks:{
     mumbai:{
-      url:MRPC,
+      url:'https://rpc.ankr.com/polygon_mumbaiy',
       accounts:[PRIVATE_KEY]
     }
     , sepolia:{
-      url:SEPOLIA_RPC,
+      url:'https://ethereum-sepolia.blockpi.network/v1/rpc/public',
       accounts:[PRIVATE_KEY],
-      gas: 2100000,
-      gasPrice: 8000000000,
+     
     }
+   
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
